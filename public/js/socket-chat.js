@@ -9,13 +9,15 @@ if (!params.has("nombre") || !params.has("sala")) {
 
 var usuario = {
     nombre: params.get('nombre'),
-    sala:params.get('sala')
+    sala: params.get('sala')
 
 };
 socket.on('connect', function () {
     console.log('Conectado al servidor');
     socket.emit('entrarChat', usuario, function (resp) {
         console.log('Usuarios conectados', resp);
+
+        renderizarUsuarios(resp);
     });
 
 });
@@ -49,6 +51,7 @@ socket.on('mensajePrivado', function (mensaje) {
 // Escuchar información
 socket.on('crearMensaje', function (mensaje) {
     console.log('Servidor:', mensaje);
+    renderizarMensajes(mensaje,false);
 
 });
 //Escuchando cambios de usuarios
@@ -56,5 +59,6 @@ socket.on('crearMensaje', function (mensaje) {
 socket.on('listarPersonas', function (personas) {
 
     console.log('Servidor:', personas);
+    renderizarUsuarios(personas);
 
 });

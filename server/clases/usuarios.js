@@ -20,8 +20,6 @@ class Usuarios {
 
     getPersonasPorSala(sala) {
         let personasEnSala = this.personas.filter(x => x.sala === sala);
-        console.log("Desde es la clase");
-        console.log(personasEnSala);
         return personasEnSala;
     }
 
